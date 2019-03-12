@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Tab Two
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-select [(ngModel)]="language" (ionChange)="changeLanguage()">
+      <ion-select-option value="en" selected="true">English</ion-select-option>
+      <ion-select-option value="es">Spanish</ion-select-option>
+      <ion-select-option value="fr">French</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        Local translation within component
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-card padding>
+    <ion-card-header>
+      Simple
+    </ion-card-header>
+    <ion-card-content>
+      <h1>{{ title }}</h1>
+      <p>{{ description }}</p>
+    </ion-card-content>
+  </ion-card>
+  <ion-card padding>
+    <ion-card-header>
+      With Params
+    </ion-card-header>
+    <ion-card-content>
+      <h1>{{ title_2 }}</h1>
+      <p>{{ description }}</p>
+    </ion-card-content>
+  </ion-card>
+  <ion-card padding>
+      <ion-card-header>
+          Simple with directive
+        </ion-card-header>
+    <ion-card-content>
+      <h1 translate>TITLE</h1>
+      <p [translate]="'description'"></p>
+    </ion-card-content>
+  </ion-card>
+  <ion-card padding>
+      <ion-card-header>
+          With params, with directive
+        </ion-card-header>
+    <ion-card-content>
+      <h1 [translate]="'TITLE_2'" [translateParams]="{value: 'John'}">TITLE</h1>
+      <p [translate]="'description'" ></p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
