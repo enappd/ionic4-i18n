@@ -11,17 +11,18 @@ export class Tab1Page {
   public title: string;
   public title_2: string;
   public description: string;
+  public name: string;
   public language: string;
   constructor(private globalization: Globalization, private _translate: TranslateService) {
-    
+
   }
 
   ionViewDidEnter(): void {
     console.log('challa?')
-    this._initTranslate()
+    this.getDeviceLanguage()
   }
 
-  public _initialiseTranslation(): void {
+  _initialiseTranslation(): void {
     this._translate.get('TITLE').subscribe((res: string) => {
       console.log(res);
       this.title = res;
@@ -33,6 +34,10 @@ export class Tab1Page {
     this._translate.get('TITLE_2', { value: 'John' }).subscribe((res: string) => {
       console.log(res);
       this.title_2 = res;
+    });
+    this._translate.get('data.name', { name_value: 'Marissa Mayer' }).subscribe((res: string) => {
+      console.log(res);
+      this.name = res;
     });
 
   }
@@ -56,7 +61,8 @@ export class Tab1Page {
       console.log('browser language is', this._translate.getBrowserLang());
     }
     else {
-      this.language = 'en'; // Set your language here
+      // Set your language here
+      this.language = 'en';
     }
 
     this._translateLanguage();
@@ -64,7 +70,10 @@ export class Tab1Page {
 
   getDeviceLanguage() {
     this.globalization.getPreferredLanguage()
-      .then(res => console.log(res))
+      .then(res => {
+        console.log(res)
+        this._initTranslate()
+      })
       .catch(e => console.log(e));
   }
 }
