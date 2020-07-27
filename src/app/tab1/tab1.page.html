@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="danger">
     <ion-title>
       Tab One
     </ion-title>
@@ -9,8 +9,8 @@
 <ion-content>
 
   <ion-item>
-    <ion-select [(ngModel)]="language" (ionChange)="changeLanguage()">
-      <ion-select-option value="en" selected="true">English</ion-select-option>
+    <ion-select [(ngModel)]="language" [value]="language" (ionChange)="changeLanguage()">
+      <ion-select-option value="en-US">English</ion-select-option>
       <ion-select-option value="es">Spanish</ion-select-option>
       <ion-select-option value="fr">French</ion-select-option>
     </ion-select>
@@ -23,7 +23,7 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-card padding>
+  <ion-card class="ion-padding">
     <ion-card-header>
       Simple
     </ion-card-header>
@@ -32,7 +32,7 @@
       <p>{{ description }}</p>
     </ion-card-content>
   </ion-card>
-  <ion-card padding>
+  <ion-card class="ion-padding">
     <ion-card-header>
       Simple with directive
     </ion-card-header>
@@ -42,7 +42,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card padding>
+  <ion-card class="ion-padding">
     <ion-card-header>
       With Params
     </ion-card-header>
@@ -52,7 +52,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card padding>
+  <ion-card class="ion-padding">
     <ion-card-header>
       With params, with directive
     </ion-card-header>
@@ -61,7 +61,7 @@
       <p [translate]="'description'"></p>
     </ion-card-content>
   </ion-card>
-  <ion-card padding>
+  <ion-card class="ion-padding">
     <ion-card-header>
       With Params, nested JSON data and directive
     </ion-card-header>

@@ -18,6 +18,11 @@ export class Tab2Page {
       "TITLE_2": "Bye {{value}}",
       "description": "Thanks for translating this text"
     });
+    _translate.setTranslation('en-US', {
+      "TITLE": "Bye sir",
+      "TITLE_2": "Bye {{value}}",
+      "description": "Thanks for translating this text"
+    });
     _translate.setTranslation('fr', {
       "TITLE": "Au revoir Monsieur",
       "TITLE_2": "Au revoir  {{value}}",
@@ -31,10 +36,8 @@ export class Tab2Page {
   }
 
   ionViewDidEnter(): void {
-    console.log('challa?')
-    this._initTranslate()
+    this.getDeviceLanguage()
   }
-
 
   public _initialiseTranslation(): void {
     this._translate.get('TITLE').subscribe((res: string) => {
@@ -62,24 +65,37 @@ export class Tab2Page {
     this._initialiseTranslation();
   }
 
-  _initTranslate() {
+  _initTranslate(language) {
     // Set the default language for translation strings, and the current language.
     this._translate.setDefaultLang('en');
 
-    if (this._translate.getBrowserLang() !== undefined) {
-      this.language = this._translate.getBrowserLang();
-      console.log('browser language is', this._translate.getBrowserLang());
+    if (language) {
+      this.language = language;
+      console.log('browser language is', language);
     }
     else {
-      this.language = 'en'; // Set your language here
+      // Set your language here
+      this.language = 'en';
     }
 
     this._translateLanguage();
   }
 
   getDeviceLanguage() {
-    this.globalization.getPreferredLanguage()
-      .then(res => console.log(res))
-      .catch(e => console.log(e));
+    if (window.Intl && typeof window.Intl === 'object') {
+      console.log('API available');
+      console.log(navigator.language);
+      this._initTranslate(navigator.language)
+    }
+    else {
+      this.globalization.getPreferredLanguage()
+        .then(res => {
+          console.log(res)
+          this._initTranslate(res.value)
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    }
   }
 }

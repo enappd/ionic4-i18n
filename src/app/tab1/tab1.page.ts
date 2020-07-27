@@ -18,7 +18,6 @@ export class Tab1Page {
   }
 
   ionViewDidEnter(): void {
-    console.log('challa?')
     this.getDeviceLanguage()
   }
 
@@ -52,13 +51,13 @@ export class Tab1Page {
     this._initialiseTranslation();
   }
 
-  _initTranslate() {
+  _initTranslate(language) {
     // Set the default language for translation strings, and the current language.
     this._translate.setDefaultLang('en');
 
-    if (this._translate.getBrowserLang() !== undefined) {
-      this.language = this._translate.getBrowserLang();
-      console.log('browser language is', this._translate.getBrowserLang());
+    if (language) {
+      this.language = language;
+      console.log('browser language is', language);
     }
     else {
       // Set your language here
@@ -69,11 +68,20 @@ export class Tab1Page {
   }
 
   getDeviceLanguage() {
-    this.globalization.getPreferredLanguage()
-      .then(res => {
-        console.log(res)
-        this._initTranslate()
-      })
-      .catch(e => console.log(e));
+    if (window.Intl && typeof window.Intl === 'object') {
+      console.log('API available');
+      console.log(navigator.language);
+      this._initTranslate(navigator.language)
+    }
+    else {
+      this.globalization.getPreferredLanguage()
+        .then(res => {
+          console.log(res)
+          this._initTranslate(res.value)
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    }
   }
 }
