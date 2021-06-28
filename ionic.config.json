@@ -1,5 +1,5 @@
 {
-  "name": "ionicTranslate",
+  "name": "ionic5-i18n",
   "integrations": {
     "cordova": {}
   },
